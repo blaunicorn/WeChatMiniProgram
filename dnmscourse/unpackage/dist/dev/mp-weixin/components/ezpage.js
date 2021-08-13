@@ -133,6 +133,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   props: {
@@ -142,12 +149,24 @@ var _default =
 
     title: {
       type: String,
-      default: "标题" } },
+      default: "标题" },
+
+    showNavigation: {
+      type: Boolean,
+      default: true },
+
+    statusBackground: {
+      type: String,
+      default: "#ffffff" } },
 
 
   data: function data() {
+    return {
+      statusBarHeight: 22,
+      height: "100%",
+      paddingTop: 0,
+      paddingBottom: 0 };
 
-    return {};
   },
   methods: {
     goBack: function goBack() {

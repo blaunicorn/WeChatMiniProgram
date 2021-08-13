@@ -128,14 +128,18 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ezpage = function ezpage() {__webpack_require__.e(/*! require.ensure | components/ezpage */ "components/ezpage").then((function () {return resolve(__webpack_require__(/*! ../../components/ezpage.vue */ 52));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
+
+
+
 {
+  components: {
+    ezpage: ezpage },
+
   data: function data() {
     return {};
 
