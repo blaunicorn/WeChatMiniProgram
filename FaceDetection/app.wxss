@@ -1,0 +1,72 @@
+/**app.wxss**/
+@import './public/style/weui.wxss';
+page {
+  width: 100%;
+  height: 100%;
+  background: #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.weui-form__opr-area{
+  margin-bottom: 20px;
+}
+.container{
+  text-align: center;
+  padding:20px;
+}
+.title{
+  font-size: 24px;
+  font-weight: 800;
+  color: #333;
+}
+
+.main{
+  border-radius: 10px;
+  overflow: hidden;
+  height: 300px;
+  margin-top: 20px;
+  position: relative;
+  box-sizing: border-box;
+}
+.cover{
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  left: 0;
+  z-index: 999;
+  opacity: 1;
+}
+.cover .line{
+  width: 100%;
+  height: 2px;
+  background-color: #0f0;
+  box-shadow: 0 -4px 5px #0f0;
+  animation: top-bot 2s  ease-in-out infinite;
+}
+@keyframes top-bot{
+  0%{
+    transform: translateY(0);
+  }
+
+  100%{
+    transform: translateY(300px);
+  }
+}
+.success{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color:rgba(0,0,0,0.5);
+  padding-top: 200px;
+}
+.success .label{
+  background-color: #fff;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  color: #666;
+}

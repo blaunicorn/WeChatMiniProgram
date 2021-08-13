@@ -1,0 +1,27 @@
+<view class="container">
+  <swiper
+  indicator-dots="{{indicatorDots}}"
+  autoplay="{{autoplay}}"
+  interval="{{interval}}"
+  duration="{{duration}}"
+  indicator-dots='true'
+>
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150" />
+    </swiper-item>
+  </block>
+</swiper>
+/** 第二板块列表 **/
+<view class='item-list'>
+<view class='pro-list' wx:for="{{proLists}}" bindtap='toDetail' data-index="{{index}}">
+<view class='pro-logo'><image width="150" height="100" src='{{item.logo}}'></image></view>
+<view class='pro-right'>
+  <view class='pro-title'>{{item.title}}
+  </view>
+  <text class='pro-desc'>{{item.desc}}</text>
+  <view class='pro-button'><button>more</button><button open-type="contact">contact</button></view>
+</view>
+</view>
+</view>
+</view>

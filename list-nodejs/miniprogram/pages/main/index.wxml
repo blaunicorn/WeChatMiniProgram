@@ -1,0 +1,17 @@
+<!--pages/main/index.wxml-->
+<view>
+  <input type="text" style="margin-left:40rpx;margin-top: 40rpx;" placeholder="请输入姓名" value="{{name}}"  bindinput="bindKeyInputName" name="" id="" />
+  <input type="text" style="margin-left:40rpx;margin-top: 40rpx;" placeholder="请输入年龄" value="{{age}}"  bindinput="bindKeyInputAge" name="" id="" />
+  <button style='margin-top: 40rpx;' bindtap='insertData'>插入数据</button>
+    <hr/>
+    <text style="margin-left:40rpx;margin-top: 40rpx;text-center: align;">数据查询</text>
+    <button style='margin-top: 40rpx;' bindtap='queryData'>查询数据</button>
+    <input style='margin-top: 40rpx;' placeholder="请输入记录ID" value="{{recordId}}" bindinput="bindKeyInputId" />
+    <text style='margin-left:40rpx;margin-top: 40rpx;'>
+     姓名：{{nameResult}}
+  </text>
+  <text style='margin-left:40rpx;margin-top: 80rpx;'>
+     年龄：{{ageResult}}
+  </text>
+
+</view>

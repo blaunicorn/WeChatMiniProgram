@@ -1,0 +1,19 @@
+/* pages/regist/index.wxss */
+.camera-content{
+  box-sizing: border-box;
+  padding:10px;
+}
+
+.preview{
+  width: 200px;
+  margin: 50px auto;
+  display: block;
+}
+
+.take-photo{
+  margin-top: 20px;
+}
+
+.info{
+  background-color: #fff;
+}

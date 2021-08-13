@@ -1,0 +1,1 @@
+<ezpage vue-id="2dba4282-1" title="标题" bind:__l="__l" vue-slots="{{['contentSection']}}"><view slot="contentSection"></view></ezpage>

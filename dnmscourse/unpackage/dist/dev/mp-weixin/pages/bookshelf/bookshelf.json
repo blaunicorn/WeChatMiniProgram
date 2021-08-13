@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "书",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "ezpage": "/components/ezpage",
+    "ezshare": "/components/ezshare",
+    "bookcell": "/components/dnms-ui/bookcell"
+  }
+}

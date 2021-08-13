@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "附近",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "ezpage": "/components/ezpage"
+  }
+}

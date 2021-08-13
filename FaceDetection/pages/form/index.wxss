@@ -1,0 +1,11 @@
+/* pages/form/index.wxss */
+/*!
+ * WeUI v2.4.1 (https://github.com/weui/weui-wxss)
+ * Copyright 2020 Tencent, Inc.
+ * Licensed under the MIT license
+ */
+ .page{height:100%}.weui-label{width:4.1em}
+
+ .err-tip{
+   color: red;
+ }

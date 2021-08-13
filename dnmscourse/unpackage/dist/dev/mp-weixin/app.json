@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/me/index",
+    "pages/books/books",
+    "pages/map/map",
+    "pages/createbookshelf/createbookshelf",
+    "pages/bookshelf/bookshelf"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "飘香书屋",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "iconPath": "static/tabicons/me_0.png",
+        "selectedIconPath": "static/tabicons/me_1.png",
+        "pagePath": "pages/me/index",
+        "text": "我的"
+      },
+      {
+        "iconPath": "static/tabicons/books_0.png",
+        "selectedIconPath": "static/tabicons/books_1.png",
+        "pagePath": "pages/books/books",
+        "text": "搜书"
+      },
+      {
+        "iconPath": "static/tabicons/map_0.png",
+        "selectedIconPath": "static/tabicons/map_1.png",
+        "pagePath": "pages/map/map",
+        "text": "附近"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取用户所在位置"
+    }
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
+}

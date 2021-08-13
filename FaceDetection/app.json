@@ -1,0 +1,27 @@
+{
+  "pages": [
+    "pages/login/index",
+     "pages/index/index",
+
+    "pages/form/index",
+    "pages/msg/index",
+    "pages/regist/index",
+    "pages/logs/logs"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于小程序位置接口的效果展示"
+    },
+    "scope.userInfo": {
+      "desc": "您的信息将用于考勤信息登记和打卡"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "人脸考勤",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
