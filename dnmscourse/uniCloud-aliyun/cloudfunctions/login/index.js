@@ -55,7 +55,7 @@ exports.main = async (event, context) => {
 	// 注意 ，不需要把token 放入数据库，只需要返回给用户
 	userData["token"] = token
 	delete userData["openid"];
-	//返回数据给客户端
+	//返回数据给客户端，让客户端拿到数据
 	// return event
 	return userData
 };

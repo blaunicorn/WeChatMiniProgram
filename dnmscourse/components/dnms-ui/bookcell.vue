@@ -1,23 +1,22 @@
 <template>
-	<ezpage title="标题">
-		<!-- 		<view slot="navigationSection">
-			
-		</view> -->
-		<view slot="contentSection">
-
-		</view>
-		<!-- 		<view slot="tabSection">
-			
-		</view> -->
-	</ezpage>
+	<view class="">
+		<navigator :url="'../bookdetail/bookdetail?bookdetail?isbn=' +data.isbn">
+			<image :src="data.cover_url" mode="aspectFit" style="width:100%;height: 150px;"></image>
+			<view class=""
+				style="font-size: 16px; text-align: center; width: 100%;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+				{{data.title}}
+			</view>
+			</navigator>
+	</view>
 
 </template>
 
 <script>
-	import ezpage from '../../components/ezpage.vue'
 	export default {
-		components: {
-			ezpage
+		props: {
+			data: {
+				type: Object
+			}
 		},
 		data() {
 			return {

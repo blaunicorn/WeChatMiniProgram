@@ -1,33 +1,29 @@
 <template>
-	<view style="position:relative;height: 100%;">
-		<view class="" 
-		style="width: 100%;position: fixed;transform: all .4s;z-index: 9999;" 
-		:style="{height:statusBarHeight+'px',background:statusBackground}">			
+	<view style="position: relative;height:100%;">
+		<view style="width: 100%;position: fixed;transition: all .4s;z-index:999999;" :style="{height:statusBarHeight+'px',background:statusBackground}"></view>
+		<view v-if="showNavigation" style="width:100%;position: fixed;top:0px;left: 0px;z-index:999998;" :style="{paddingTop:statusBarHeight+'px'}">
+			<slot name="leftItems"></slot>
+			<slot name="navigationSection">
+				<eznavigationbar :hasBottomLine="navigationHasBottomLine">
+					<view slot='title'>{{title}}</view>
+				</eznavigationbar>
+			</slot>
 		</view>
-		<view class="" v-if="showNavigation" style="width:100%;position:fixed;top:0px;left: 0px;z-inde:9998;"> 
-			<slot name="navigationSection"></slot>
-		</view>
-<!-- 		<view class="header" style="height:50px;width:100%;border-bottom:1px  solid #C0C0C0;">
-			<button style="position: absolute;margin-top:20px; heigth:10px; display: inline; " type="default" @tap="goBack">返回</button>
-			<view class="" style="position: absolute; display: inline;">
-				{{title}}
-			</view> 
-		</view> -->
-
-		<!-- 		<view v-slot="navigationSection">
-			
-		</view> -->
-		<view class="page">
+		<view style="width:100%;height:100%;position: relative;" :style="{paddingTop:paddingTop+'px',paddingBottom:paddingBottom+'px'}">
 			<slot name="contentSection"></slot>
 		</view>
-		<view class="" style="100%;position:fixed;z-index:998;bottom:0;" >
-			<slot name ="tabSection"></slot>
+		<view style="width:100%;position: fixed;z-index: 998;bottom: 0;">
+			<slot name="tabSection"></slot>
 		</view>
 	</view>
 </template>
 
 <script>
+	import eznavigationbar from './eznavigationbar.vue'
 	export default {
+		components:{
+			eznavigationbar
+		},
 		props: {
 			navigationHasBottomLine: {
 				type: Boolean,
@@ -54,7 +50,23 @@
 				paddingBottom: 0,
 			}
 		},
+		mounted() {
+			this.sysInfo = uni.getSystemInfoSync();
+			console.log('sysInfo',this.sysInfo)
+			this.height=this.sysInfo.screenHeight+"px";
+			this.paddingTop = this.autoPaddingTop();
+			this.paddingBottom = this.autoPaddingBottom();
+			this.statusBarHeight = this.sysInfo.statusBarHeight;
+		},
 		methods: {
+			autoPaddingTop() {
+				if (this.showNavigation) return 44+this.sysInfo.statusBarHeight;
+				return this.sysInfo.statusBarHeight;
+			},
+			autoPaddingBottom() {
+				if (this.$slots.tabSection) return 50+(this.sysInfo.safeArea?34:0);
+				return 0;
+			},
 			goBack() {
 				uni.navigateBack({
 					delta: 1

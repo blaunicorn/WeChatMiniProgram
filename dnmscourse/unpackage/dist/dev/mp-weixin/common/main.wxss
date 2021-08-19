@@ -1192,12 +1192,10 @@ page{
 	  -webkit-justify-content: space-between;
 	          justify-content: space-between;
 	  padding: 200rpx 0;
-	  -webkit-box-sizing: border-box;
-	          box-sizing: border-box;
+	  box-sizing: border-box;
 }
 view{
-	  -webkit-box-sizing: border-box;
-	          box-sizing: border-box;
+	  box-sizing: border-box;
 }
 .dnms-tag
 	{

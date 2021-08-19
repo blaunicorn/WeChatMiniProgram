@@ -1,30 +1,23 @@
 <template>
-	<ezpage class="content" :navigationHasBottomLine="false">
+	<ezpage class="" :navigationHasBottomLine="false">
 		<view slot="contentSection" class="">
-			<view @tap="updateUserProfile()" style="text-align:center;background-color: #FFFFFF;padding-bottom: 10px;"
+			<view @tap="updateUserProfile()" style="text-align:center;background-color: #FFFFFF;padding: 20px 0;"
 				class="">
-				<image :src="userInfo.avatarUrl?userInfo.avatarUrl :'/static/logo.png'" mode="widthFix" class="logo"
-					style=""></image>
+				<image :src="userInfo.avatarUrl?userInfo.avatarUrl :'/static/logo.png'" mode="widthFix" class=""
+				style="width:100px;height:100px;border-radius:50px;background-color: #8F8F94;"></image>
 				<view>{{userInfo.nickName}}</view>
 				<view><text class="dnms-tag" style="background-color: #3aa64e;" @tap="">同步微信信息</text></view>
 			</view>
 			<view style="padding: 10px">
-				<view @click="btnCreateBookshelf" class="dnms-blockbutton" style="border-radius: 40rpx;color: #F8F8F8 ;font-size:40rpx; background-color: #333333;width:300px;height:30px;line-height: 20rpx; display: flex;
-
-  align-items: center;
-
-  justify-content: center;">
+				<view @click="btnCreateBookshelf" class="dnms-blockbutton" 
+				style="margin-bottom:10px;">
 					新建书房
 				</view>
-				<view  v-for="(item,index) in bookshelfs" :key="item._id" class="" >
+				<view  v-for="(item,index) in bookshelfs" :key="item._id" class="" 
+				style="margin-bottom:10px;">
 					<bookshelfcell  :bookshelf="item" @removeHandler="onRemoveHandler"></bookshelfcell>
 				</view>
 			</view>
-		</view>
-		
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">111{{title}}</text>
 		</view>
 	</ezpage>
 </template>
@@ -49,7 +42,22 @@
 				bookshelfs: []
 			}
 		},
+		onLaunch(query) {
+			console.log('query',query)	
+		},
 		async onLoad(options) {
+			
+			// 如果携带信息,就用options转跳页面
+			console.log(options.scene)
+			if (options.scene) {
+				let scene = unescape(options.scene);
+				let params = scene.split("=");
+				let key = params[0];
+				uni.navigateTo({
+					url:"../bookshelf/bookshelf?id="+params[1]
+				})
+			}
+			
 			// uni.login({
 			// 	provider: "weixin",
 			// 	success: (res) => {
@@ -85,6 +93,7 @@
 					})
 				}
 			})
+
 		},
 			
 		onShow() {
@@ -120,7 +129,7 @@
 				uni.getUserProfile({
 					desc: "申请获取用户信息",
 					success: (res) => {
-						console.log(res)
+						console.log('申请获取用户信息结果',res)
 						this.userInfo = Object.assign(this.userInfo, res.userInfo)
 						cloudApi.call({
 							name: "updateuserinfo",

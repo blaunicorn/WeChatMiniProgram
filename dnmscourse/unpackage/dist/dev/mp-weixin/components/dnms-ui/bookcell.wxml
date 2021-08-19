@@ -1,1 +1,1 @@
-<ezpage vue-id="2dba4282-1" title="标题" bind:__l="__l" vue-slots="{{['contentSection']}}"><view slot="contentSection"></view></ezpage>
+<view><navigator url="{{'../bookdetail/bookdetail?bookdetail?isbn='+data.isbn}}"><image style="width:100%;height:150px;" src="{{data.cover_url}}" mode="aspectFit"></image><view style="font-size:16px;text-align:center;width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;">{{''+data.title+''}}</view></navigator></view>

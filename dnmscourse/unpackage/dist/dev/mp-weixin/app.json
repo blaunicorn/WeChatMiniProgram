@@ -4,7 +4,9 @@
     "pages/books/books",
     "pages/map/map",
     "pages/createbookshelf/createbookshelf",
-    "pages/bookshelf/bookshelf"
+    "pages/bookshelf/bookshelf",
+    "pages/index/index",
+    "pages/bookdetail/bookdetail"
   ],
   "subPackages": [],
   "window": {
@@ -41,6 +43,5 @@
       "desc": "获取用户所在位置"
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

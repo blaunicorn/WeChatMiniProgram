@@ -6,6 +6,7 @@ exports.main = async (event, context) => {
 	console.log('event : ', event)
 	const db = uniCloud.database()
 	const dbCmd = db.command;
+	// 如果携带token，就校验token，并生成openid
 	const payload = event.token?verifyToken(event.token):null;
 	
 	// actions
@@ -13,7 +14,8 @@ exports.main = async (event, context) => {
 	const action = event.action; // create, query, get
 	let dbRes;
 	if (action ==="create") {
-		// 走内容安全监测端口
+		// 一般应该还走一步内容安全监测流程
+		// 创建一个书房的表
 		// 书房的所有者 ，名称、地址、地理位置、总书量	
 		dbRes = await db.collection("bookshelfs").add({
 			owner: payload.openid,  
@@ -27,8 +29,8 @@ exports.main = async (event, context) => {
 		dbRes = await db.collection("bookshelfs").where({
 			owner:dbCmd.eq(payload.openid)
 		})
-		.orderBy("_id","desc")
-		.limit(10)
+		.orderBy("_id","desc") // 通过id排序
+		.limit(10)  //skip( ) 可以翻页
 		.get()
 	} else if (action === "delete") {
 		dbRes = await db.collection("bookshelfs").where({
@@ -51,7 +53,29 @@ exports.main = async (event, context) => {
 		
 		dbRes.data[0]["ownerinfo"] = ownerinfo.data[0];
 		return dbRes.data[0]
+	} else if (action === 'listbygeo') {
+		dbRes = await db.collection("bookshelfs").where({
+			geopoint:dbCmd.geoNear({
+				geometry:new db.Geo.Point(event.longitude,event.latitude),
+				maxDistance:3000, // 3000米
+				minDistance:0
+			})
+		})
+		.limit(100)
+	    .get();
+	} else if (action === 'update') {
+		dbRes = await db.collection("bookshelfs").where({
+			"_id": dbCmd.eq(event._id),
+			"owner":dbCmd.eq(payload.openid)
+		})
+		.limit(1)
+	    .update({
+			name: event.name,
+			address: event.address,
+			geopoint: new db.Geo.Point(event.longitude,event.latitude)
+		});
 	}
+
 	//返回数据给客户端
 	// return event
 	return dbRes.data;
