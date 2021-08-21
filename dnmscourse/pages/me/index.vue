@@ -1,5 +1,5 @@
 <template>
-	<ezpage class="" :navigationHasBottomLine="false">
+	<ezpage class="" :navigationHasBottomLine="false" :title="title">
 		<view slot="contentSection" class="">
 			<view @tap="updateUserProfile()" style="text-align:center;background-color: #FFFFFF;padding: 20px 0;"
 				class="">
@@ -34,7 +34,7 @@
 		},
 		data() {
 			return {
-				title: 'Hello',
+				title: '萤光觅书',
 				userInfo: {
 					nickName: '',
 					avatarUrl: ''

@@ -128,7 +128,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var ezpage = function ezpage() {__webpack_require__.e(/*! require.ensure | components/ezpage */ "components/ezpage").then((function () {return resolve(__webpack_require__(/*! ../../components/ezpage.vue */ 56));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -136,16 +136,79 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/cloudApi.js */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ezpage = function ezpage() {__webpack_require__.e(/*! require.ensure | components/ezpage */ "components/ezpage").then((function () {return resolve(__webpack_require__(/*! ../../components/ezpage.vue */ 64));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var bookcell = function bookcell() {__webpack_require__.e(/*! require.ensure | components/dnms-ui/bookcell */ "components/dnms-ui/bookcell").then((function () {return resolve(__webpack_require__(/*! ../../components/dnms-ui/bookcell.vue */ 74));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
-    ezpage: ezpage },
+    ezpage: ezpage,
+    bookcell: bookcell },
 
   data: function data() {
-    return {};
-
+    return {
+      books: [],
+      keyword: '',
+      canloadmore: true };
 
   },
-  methods: {} };exports.default = _default;
+  onLoad: function onLoad() {
+    this.getBooks();
+  },
+  onReachBottom: function onReachBottom() {
+    this.getBooks(this.books[this.books.length - 1]._id);
+  },
+  methods: {
+    btnSearch: function btnSearch() {
+      this.canloadmore = true;
+      this.getBooks();
+    },
+    getBooks: function getBooks() {var _this = this;var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      // if(!this.canloadmore) return;
+      _cloudApi.default.call({
+        name: "books",
+        data: {
+          action: "listall",
+          start: start,
+          keyword: this.keyword },
+
+        success: function success(res) {
+          _this.canloadmore = res.result.length >= 9;
+          if (start) _this.books = _this.books.concat(res.result);else
+          {
+            _this.books = res.result;
+          }
+        } });
+
+    } } };exports.default = _default;
 
 /***/ })
 

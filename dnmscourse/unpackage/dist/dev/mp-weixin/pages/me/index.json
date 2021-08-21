@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的",
+  "navigationBarTitleText": "我的书架",
   "usingComponents": {
     "ezpage": "/components/ezpage",
     "bookshelfcell": "/components/dnms-ui/bookshelfcell"

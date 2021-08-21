@@ -1,5 +1,5 @@
 <template>
-	<ezpage :title="'书房：'+ shelfInfo.name">
+	<ezpage :title="'书架：'+ shelfInfo.name">
 		<view slot="contentSection" style="height:100%;">
 			<canvas id="myPoster" type="2d" 
 			style="position: absolute;left:-350px;width:350px;height:750px;"></canvas>
@@ -73,14 +73,18 @@
 		},
 		onLoad(options) {
 			this.shelfid = options.id;
+			// if(!this.shelfid)uni.navigateBack();
 			this.getBookshelfInfo();
 			this.requestBookList()
 		},
 		onReachBottom() {
-
+			this.requestBookList(this.books[this.books.length-1]._id)
 		},
 		onShareAppMessage() {
-
+			return {
+				title: this.title,
+				path:'/pages/me/index?scene=sid=' + this.shelfInfo._id
+			}
 		},
 		methods: {
 			btnEnterEditing() {
@@ -94,7 +98,30 @@
 				uni.showActionSheet({
 					itemList:["置顶","删除"],
 					success:(res)=> {
-						
+						if (res.tapIndex=== 0) {
+							cloudApi.call({
+								name:"books",
+								data: {
+									action:"movetop",
+									bookid:e.currentTarget.dataset.id
+								},
+								success:(res)=> {
+									this.requestBookList()
+								}
+							})
+						} else if (res.tapIndex === 1) {
+							cloudApi.call({
+								name: "books",
+								data:{
+									action:"delete",
+									shelfid:this.shelfid,
+									bookid:e.currentTarget.dataset.id
+								},
+								success:(res)=> {
+									this.requestBookList()
+								}
+							})
+						}
 					}
 				})
 			},
@@ -113,14 +140,61 @@
 			},
 			drawPoster() {
 				uni.showLoading({
+					title: "生成中...",
 					mask:true
 				});
+				console.log('0000');
+				
 				const query = wx.createSelectorQuery();
+				console.log('0001');
 				query.select('#myPoster')
-				.fields({node:true,size:true})
-				.exec(async (res) => {
+				.fields({id: true,node:true,size:true})
+				.exec(this.init1.bind(this));
+			},
+			init(res) {
+				   console.log(res)
+				    const canvas = res[0].node
+				    const ctx = canvas.getContext('2d')
+				    const dpr = wx.getSystemInfoSync().pixelRatio
+				    //新接口需显示设置画布宽高；
+				    canvas.width = res[0].width * dpr
+				    canvas.height = res[0].height * dpr
+				ctx.scale(dpr,dpr);
+				ctx.fillStyle="#FFFFFF";
+				ctx.fillRect(0,0,350,750);
+				
+				ctx.fillStyle="#000000";
+				ctx.fontsize = 16;
+				ctx.fillText(this.shelfInfo.name,70,25);
+				
+				ctx.fontsize =12;
+				ctx.fillText("馆主：" + this.shelfInfo.ownerinfo.nickName,70,44)
+				
+				ctx.fontsize =12;
+				ctx.fillText("地址："+this.shelfInfo.address,70,60)
+				uni.canvasToTempFilePath({
+					canvas: canvas,
+					success: (res) => {
+						uni.previewImage({
+							current: res.tempFilePath,
+							urls: [res.tempFilePath]
+						})
+						// 提示保存到相册
+						uni.saveImageToPhotosAlbum({
+							filePath: res.tempFilePath
+						})
+					},
+					fail:(error)=> {
+						console.log(error)
+					}
+				})
+				uni.hideLoading();
+			},
+			async init1(res) {
+					console.log('1111');
 					let canvas = res[0].node;
 					let ctx = canvas.getContext("2d");
+					console.log('2222');
 					let dpr = uni.getSystemInfoSync().pixelRatio;
 					canvas.width = res[0].width *dpr;
 					canvas.height = res[0].height * dpr;
@@ -133,10 +207,10 @@
 					ctx.fillText(this.shelfInfo.name,70,25);
 					
 					ctx.fontsize =12;
-					ctx.fillText(this.shelfInfo.ownerinfo.nickName,70,44)
+					ctx.fillText("馆主：" + this.shelfInfo.ownerinfo.nickName,70,44)
 					
 					ctx.fontsize =12;
-					ctx.fillText(this.shelfInfo.address,70,60)
+					ctx.fillText("地址："+this.shelfInfo.address,70,60)
 					
 					//绘制头像
 					let image = canvas.createImage();
@@ -210,7 +284,7 @@
 								console.log(error)
 							}
 						})
-					}	
+					};	
 					// 加入小程序码.,需要服务端调用，需要服务器生成token 去调用
 					const wxacodeRes = await cloudApi.call({
 						name: "getwxacode",
@@ -245,20 +319,27 @@
 					
 					uni.hideLoading();				
 					
-				})
+				
 			},
-			requestBookList() {
+			requestBookList(start = 0) {
+				if (start && !this.canloadmore) return
 				// 请求该书房所有图书的列表
 				cloudApi.call({
 					name:"books",
 					data: {
 						action:"listbyshelf",
 						shelfid:this.shelfid,
-						start:0,
+						start:start,
 					},
 					success:(res)=> {
 						console.log(res)
-						this.books = res.result;
+						this.canloadmore = res.result.length>=9;
+						if (!start) {
+							this.books = res.result;
+						} else {
+							this.books = this.books.concat(res.result);
+						}
+						
 					}
 				})
 			},
@@ -286,6 +367,18 @@
 							},
 							success:(res)=> {
 								console.log(res)
+								cloudApi.call({
+									name: "books",
+									data: {
+										action:"add",
+										shelfid:this.shelfid,
+										isbnid:res.result._id
+									},
+									success:(res)=> {
+										console.log(res)
+										this.requestBookList()
+									}
+								})
 							}
 						})
 					}
@@ -294,7 +387,7 @@
 				// cloudApi.call({
 				// 	name: "ISBNQuery",
 				// 	data: {
-				// 		isbn:"9787547739525"
+				// 		isbn:"9787115564672"
 				// 	},
 				// 	success:(res)=> {
 				// 		console.log(res)

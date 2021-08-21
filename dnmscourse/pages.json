@@ -3,7 +3,7 @@
 		{
 			"path": "pages/me/index",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的书架"
 			}
 		}
 	    ,{
@@ -86,7 +86,7 @@
 	"globalStyle": {
 		"navigationStyle":"custom",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "飘香书屋",
+		"navigationBarTitleText": "萤光觅书",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	}

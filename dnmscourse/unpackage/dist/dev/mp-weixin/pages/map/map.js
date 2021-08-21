@@ -142,7 +142,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/cloudApi.js */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ezpage = function ezpage() {__webpack_require__.e(/*! require.ensure | components/ezpage */ "components/ezpage").then((function () {return resolve(__webpack_require__(/*! ../../components/ezpage.vue */ 56));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _cloudApi = _interopRequireDefault(__webpack_require__(/*! ../../common/cloudApi.js */ 20));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var ezpage = function ezpage() {__webpack_require__.e(/*! require.ensure | components/ezpage */ "components/ezpage").then((function () {return resolve(__webpack_require__(/*! ../../components/ezpage.vue */ 64));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     ezpage: ezpage },

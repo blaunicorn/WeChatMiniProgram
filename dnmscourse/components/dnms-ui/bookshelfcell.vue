@@ -10,7 +10,7 @@
 			<text style="color:#999999;font-size: 12px;margin-left: 5px;">
 			({{bookshelf.totalbook}}本藏书)</text>
 			</view>
-			更多<view @click="btnMore" class="iconfont icon-more" style="color:#666;"></view>
+			<view @click="btnMore" class="iconfont icon-more" style="color:#666;"><text style="font-size: 33rpx;">更多</text></view>
 		</view>
 		<view class="" @click="btnEnter">
 			<image mode="aspectFill" 

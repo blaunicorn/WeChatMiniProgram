@@ -7,7 +7,7 @@
     "urlCheck": false,
     "es6": true,
     "enhance": true,
-    "postcss": true,
+    "postcss": false,
     "preloadBackgroundData": false,
     "minified": true,
     "newFeature": false,
@@ -39,7 +39,7 @@
     "showES6CompileOption": false
   },
   "compileType": "miniprogram",
-  "libVersion": "",
+  "libVersion": "2.19.2",
   "appid": "wxdaf109597d82a1ac",
   "projectname": "dnmscourse",
   "condition": {

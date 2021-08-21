@@ -16,7 +16,7 @@
 		<view class="navTitle">
 			<slot name="title"></slot>
 		</view>
-		<view class="" style="width:94px;height: 44px;">333			
+		<view class="" style="width:94px;height: 44px;">		
 		</view>
 	</view>
 	<view class="" style="height:1px;width:100%;"
