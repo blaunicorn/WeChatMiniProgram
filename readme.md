@@ -17,5 +17,14 @@ git push -u origin main
 
 
 ### 20210813 小程序学习
-[小程序书屋源码](F:/code-tencent/kaikeba/Documentation/uniapp-unicloud-dnms-main.zip) 小程序书屋源码
+
+#### dnmscourse
+#### 学习大圣老师的 觅我书屋uni-app
+[小程序书屋源码](F:/code-tencent/kaikeba/Documentation/uniapp-unicloud-dnms-main.zip) 
 [书屋学习](F:/code-tencent/WeChatMiniProgram/dnmscourse)
+
+#### school-uniapp
+ 学习阿东编程的uni-app开发
+ [阿东编程](https://space.bilibili.com/176393139/)
+ 
+ #### 蓝牙通信
